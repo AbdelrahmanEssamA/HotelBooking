@@ -17,6 +17,7 @@ header {
   left: 260px;
   font-size: 14px;
   padding: 25px 50px;
+  z-index: 999;
   width: 100%;
   height: 80px;
   background: rgb(255, 255, 255);
@@ -93,6 +94,39 @@ input, textarea, select, button:focus  {
   border-left: 4px solid #1db5b7 !important;
 }
 
+span.active {
+  color: #00ce8f;
+  font-weight: bold;
+}
+
+span.expired {
+  color: #ffb500;
+  font-weight: bold;
+}
+
+span.canceled {
+  color: #f95c5c;
+  font-weight: bold;
+}
+
+#Error {
+    margin-top: 10px;
+    background: #e91e49;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+#Success {
+    margin-top: 10px;
+    background: #00e3ab;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
 #complains-number {
   border-radius: 40px;
   background: #fc768a;
@@ -105,7 +139,7 @@ input, textarea, select, button:focus  {
   border-radius: 40px;
   background: #12cc93;
   padding: 4px 12px;
-  margin-left: 62px;
+  margin-left: 70px;
   font-size: 11px;
 }
 
@@ -153,9 +187,7 @@ th {
 }
 
 
-.cancel-icon {
-  color: #fb5b57;
-}
+
 
 
 #main input:focus, #main textarea:focus, #main select:focus {
@@ -171,6 +203,13 @@ th {
   background: #fff;
   transition: .5s;
   margin: 10px 0px;
+}
+
+#main input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin-right: 20px;
 }
 
 #main textarea {
@@ -204,6 +243,15 @@ th {
   padding-right: 6px;
 }
 
+#add_image_upload {
+    background: #4CAF50;
+    color: #fff;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-left: 12px;
+}
+
 .edit {
   color: #354764;
 }
@@ -211,6 +259,7 @@ th {
   color: #354764;
   margin-left: 14px;
 }
+
 
 
 
@@ -285,21 +334,39 @@ th {
   font-size: 30px;
 }
 
-span.active {
-  color: #00ce8f;
-  font-weight: bold;
+
+
+
+.hotel_image {
+  height : 100px;
+  width: 140px;
+  border-radius: 10px;
+  margin-right: 12px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-span.expired {
-  color: #ffb500;
-  font-weight: bold;
+i.cancel-icon.material-icons {
+    color: #cc0000;
 }
 
-span.canceled {
-  color: #f95c5c;
-  font-weight: bold;
+.x {
+    color: #ffffff;
+    background: #cc0000;
+    border-radius: 8px 0px;
+    font-size: 10px;
+    z-index: 0;
+    padding: 0px 9px;
+    width: 26px;
+    position: absolute;
+    cursor: pointer;
+    margin-top: -130px;
+    margin-left: 0px;
 }
 
+.hotel_image_block {
+  display: inline-block;
+}
 .p-5 {
   padding : 5px;
 }

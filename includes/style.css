@@ -129,7 +129,7 @@ nav {
   border: none;
   height: 70px;
   border-radius: 6px;
-  padding: 22px 22px 22px 50px;
+  padding: 22px 22px 22px 66px;
   margin: 10px 0px 0px 0px;
   transition: .5s;
   width:100%;
@@ -138,14 +138,66 @@ nav {
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
 }
 
+#book-form span, .first-row span {
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #969696;
+    margin: 20px 66px;
+}
+
 #checkindate, #checkin {
   cursor: pointer;
+  padding: 52px 22px 32px 66px !important;
+}
+
+select#Nights {
+    height: 84px !important;
+    padding: 38px 22px 20px 66px !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select#nights {
+    height: 90px !important;
+    padding: 38px 22px 20px 66px !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 #book-form i {
   position: absolute;
-  margin: 40px 20px;
+  margin: 46px 25px;
   color: rgb(0, 81, 103);
+}
+
+.first-row i {
+  position: absolute;
+  margin: 38px 25px;
+  color: #555;
+}
+
+i.fas.fa-search.search-icon {
+    margin-top: 38px !important;
+}
+
+
+span.active {
+  color: #00ce8f;
+  font-weight: bold;
+}
+
+span.expired {
+  color: #ffb500;
+  font-weight: bold;
+}
+
+span.canceled {
+  color: #f95c5c;
+  font-weight: bold;
 }
 
 #book-form input[type="submit"] {
@@ -173,6 +225,16 @@ nav {
   border-radius: 8px;
   color: #fff;
   display: none;
+}
+
+
+
+#success {
+  margin-top: 10px 0px 30px 0px;
+  background: #00e3ab;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
 }
 
 .zigzag {
@@ -331,12 +393,16 @@ nav {
   height : 66px;
   margin: 30px;
 }
+#ErrorImg {
+  height : 26px;
+  margin: 30px;
+}
 
 #WhitePanel input:focus, #WhitePanel select:focus, #visa input:focus {
   border-color: #00dcc3;
 }
 
-#WhitePanel input, #WhitePanel select, #visa input {
+#WhitePanel input:not([type='checkbox']), #WhitePanel select, #visa input {
   width: 100%;
   border: 3px solid #f3f3f3;
   border-radius: 8px;
@@ -401,6 +467,26 @@ nav {
   box-shadow: 0px 0px 0px 3px #fff9da;
   border: 1px solid #fff;
   color: #86460c !important;
+}
+
+.success_registeration_msg {
+  padding : 60px 0px 140px 0px;
+}
+
+.failed_registeration_msg {
+  padding : 60px 0px 140px 0px;
+}
+
+.success_login_msg {
+  padding : 60px 0px 140px 0px;
+}
+
+.failed_login_msg {
+  padding : 40px 0px 70px 0px;
+}
+
+#cookies_content, #aboutus_content, #terms_content, #privacy_policy_content {
+  display : none;
 }
 
 .subscribe-bg {
@@ -609,12 +695,12 @@ a.ui-state-default {
 
 
 .profile-picture {
-  background: url(./../images/halim.jpg);
   background-size: 200px;
   height: 200px;
   width: 200px;
   border-radius: 200px;
   border: 10px solid #e8e8e8;
+  background: #e8e8e8;
   margin: auto;
   margin-top: 0px;
 }
@@ -1059,7 +1145,7 @@ span#totalDue {
   font-size: 24px;
 }
 
-#room, #payment {
+#hotel_id, #room, #payment, .hidden input {
   display: none;
 }
 

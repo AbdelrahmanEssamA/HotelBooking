@@ -17,6 +17,7 @@ header {
   left: 260px;
   font-size: 14px;
   padding: 25px 50px;
+  z-index: 999;
   width: 100%;
   height: 80px;
   background: rgb(255, 255, 255);
@@ -108,6 +109,24 @@ span.canceled {
   font-weight: bold;
 }
 
+#Error {
+  margin-top: 10px;
+  background: #e91e49;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+#Success {
+  margin-top: 10px;
+  background: #00e3ab;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
 #complains-number {
   border-radius: 40px;
   background: #fc768a;
@@ -120,7 +139,7 @@ span.canceled {
   border-radius: 40px;
   background: #12cc93;
   padding: 4px 12px;
-  margin-left: 62px;
+  margin-left: 70px;
   font-size: 11px;
 }
 
@@ -169,7 +188,20 @@ th {
 
 
 
+a#visit-website {
+  position: fixed;
+  right: 40px;
+  background: #ff6384;
+  border-radius: 40px;
+  padding: 0px 20px;
+  color: #fff;
+}
 
+a#visit-website i {
+  font-size: 14px;
+  margin-right: 4px;
+  vertical-align: text-top;
+}
 
 #main input:focus, #main textarea:focus, #main select:focus {
   border-color: #00dcc3;
@@ -222,6 +254,15 @@ th {
   vertical-align: -4px;
   font-size: 16px;
   padding-right: 6px;
+}
+
+#add_image_upload {
+  background: #4CAF50;
+  color: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-left: 12px;
 }
 
 .edit {
@@ -329,7 +370,32 @@ th {
 #dashboard-items h1 {
   font-size: 30px;
 }
+.hotel_image {
+  height : 100px;
+  width: 140px;
+  border-radius: 10px;
+  margin-right: 12px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
+.x {
+  color: #ffffff;
+  background: #cc0000;
+  border-radius: 8px 0px;
+  font-size: 10px;
+  z-index: 0;
+  padding: 0px 9px;
+  width: 26px;
+  position: absolute;
+  cursor: pointer;
+  margin-top: -130px;
+  margin-left: 0px;
+}
+
+.hotel_image_block {
+  display: inline-block;
+}
 .p-5 {
   padding : 5px;
 }

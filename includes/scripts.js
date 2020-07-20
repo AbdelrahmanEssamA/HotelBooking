@@ -1,3 +1,10 @@
+function setCookie(cname, cvalue) {
+  var d = new Date();
+  d.setTime(d.getTime() + (24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 // Slideshow hotel images ** hotel page ** //
 var SlideImages = document.getElementsByClassName("SlideImg");
 var SlideImagesLength = SlideImages.length;
@@ -29,17 +36,6 @@ window.setInterval(function() {
   plusSlide(1);
 }, 5000);
 
-
-if (document.getElementById("Country") != null) {
-  var Countries = ['Afghanistan','Albania','Algeria','American Samoa','Andorra','Angola','Anguilla','Antarctica','Antigua','Argentina','Armenia','Aruba','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bermuda','Bhutan','Bolivia','Bosnia','Botswana','Bouvet Island','Brazil','British Indian Ocean Territory','Brunei Darussalam','Bulgaria','Burkina Faso','Burundi','Cambodia','Cameroon','Canada','Cape Verde','Cayman Islands','Central African Republic','Chad','Chile','China','Christmas Island','Cocos (Keeling) Islands','Colombia','Comoros','Congo','Congo','Cook Islands','Costa Rica','Croatia','Cuba','Cyprus','Czech Republic','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Ethiopia','Falkland Islands','Faroe Islands','Fiji','Finland','France','France','French Guiana','French Polynesia','French Southern Territories','Gabon','Gambia','Georgia','Germany','Ghana','Gibraltar','Greece','Greenland','Grenada','Guadeloupe','Guam','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Holy See','Honduras','Hong Kong','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Korea','Kuwait','Kyrgyzstan','Latvia','Lebanon','Lesotho','Liberia','Liechtenstein','Lithuania','Luxembourg','Macau','Macedonia','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Martinique','Mauritania','Mauritius','Mayotte','Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Montserrat','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands','Netherlands Antilles','New Caledonia','New Zealand','Nicaragua','Niger','Nigeria','Niue','Norfolk Island','Northern Mariana Islands','Norway','Oman','Pakistan','Palau','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Pitcairn','Poland','Portugal','Puerto Rico','Qatar','Reunion','Romania','Russian Federation','Rwanda','Saint Kitts And Nevis','Saint Lucia','Saint Vincent And The Grenadines','Samoa','San Marino','Sao Tome And Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Georgia','Spain','Sri Lanka','St. Helena','St. Pierre And Miquelon','Sudan','Suriname','Svalbard And Jan Mayen Islands','Swaziland','Sweden','Switzerland','Syrian Arab Republic','Taiwan','Tajikistan','Tanzania','Thailand','Togo','Tokelau','Tonga','Trinidad And Tobago','Tunisia','Turkey','Turkmenistan','Turks And Caicos Islands','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','United States Minor Outlying Islands','Uruguay','Uzbekistan','Vanuatu','Venezuela','Viet Nam','Virgin Islands (British)','Virgin Islands (U.S.)','Wallis And Futuna Islands','Western Sahara','Yemen','Yugoslavia','Zambia','Zimbabwe'];
-
-  for (var i = 0; i < Countries.length; i++) {
-    var option = document.createElement("option");
-    option.innerHTML = Countries[i];
-    option.setAttribute("value", Countries[i]);
-    document.getElementById("Country").appendChild(option);
-  }
-}
 
 
 // Register valiation ** register page ** //
@@ -138,6 +134,7 @@ function RegisterValidation() {
   }
 
   Error.style.display = "none";
+  return true;
 
 }
 
@@ -307,45 +304,55 @@ function SearchValiation() {
 
   Error.style.display = "none";
 
+  setCookie("nights",Nights);
+  setCookie("checkin",Checkin);
+
 }
 
 
 
 
-// Subscription Valiation ** home page ** //
-function SubscriptionValidation() {
+$( "#subcribption-form" ).submit(function( event ) {
+  event.preventDefault();
   var RegexEmailOnly = /\S+@\S+\.\S+/;
   var email = $("#subscribe-input").val();
-  if (RegexEmailOnly.test(email) == false) {
-    alert("Enter a valid email.\ne.g: a@b.c");
-    return false;
+  if (RegexEmailOnly.test(email)) {
+    $.ajax({
+      type: 'POST',
+      url: './subscribe.php',
+      data: 'email=' + email,
+      success: function(data) {
+        if (data == "done") {
+          $("#subcribption-form").hide();
+          $("#subcribption-success").fadeIn(1000);
+        } else {
+          alert("Failed");
+        }
+      }
+    });
   } else {
-    //Ajax Request will be used here
-    $("#subcribption-form").hide();
-    $("#subcribption-success").fadeIn(1000);
-    return false;
+      alert("Failed");
   }
-}
-
+});
 
 // Fill popup with text before showing it //
 function fillPopupForm(type) {
   switch (type) {
     case "cookies":
     $("#popupTitle").html("What is Cookies ?");
-    $("#popupBody").html("Cookies are small text files which are sent to and stored on your computer or mobile and which are common on the internet. Some of the cookies are necessary to enable you to use the site’s full functionality, while others are used in order to improve your user experience and facilitate navigation on the site.");
+    $("#popupBody").html($("#cookies_content").html());
     break;
     case "aboutus":
     $("#popupTitle").html("Who we are ?");
-    $("#popupBody").html("Holiday is an hotel reservation system that help you to book more than 2000 hotel worlwide online. you can compare to get the best offer.");
+    $("#popupBody").html($("#aboutus_content").html());
     break;
     case "terms":
     $("#popupTitle").html("Terms & Conditions");
-    $("#popupBody").html("<ul><li>At time of check-in or booking, we will take your credit/depit card details.</li><li>We shall also have the right to require full payment in advance or a deposit.</li><li>The prices displayed on the Websites are an average per night per person.</li><li>Any meals, service or VAT (at the prevailing rate) are included only if specified.</li></ul>");
+    $("#popupBody").html($("#terms_content").html());
     break;
     case "privacy":
     $("#popupTitle").html("Privacy Policy");
-    $("#popupBody").html("<strong>What information do we collect?</strong><ul><li>Contact information, and preferences.</li><li>Information about your use of our hotels.</li><li>Images of you in areas of our hotels.</li><li>Conversations you have when you call our team.</li></ul>");
+    $("#popupBody").html($("#privacy_policy_content").html());
     break;
     default:
     $("#popupTitle").html("");
@@ -383,8 +390,8 @@ $(document).ready(function() {
   }
 });
 
-$("#checkin").datepicker();
-$("#checkindate").datepicker();
+$("#checkin").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#checkindate").datepicker({ dateFormat: 'yy-mm-dd' });
 
 
 window.onscroll = function() {
@@ -434,8 +441,6 @@ $("#make-reservation").click(function() {
   $("#Reservation").slideToggle();
 });
 
-
-
 var roomtype = false , checkin = false , nights = false;
 
 function Ready() {
@@ -449,13 +454,32 @@ function UpdateCart(RoomType , Nights) {
   var TotalPrice = RoomPrice + AddedValueTax;
 
   $("#payment").val(TotalPrice);
-
   $("#numberNights").html(Nights);
   $("#roomPrice").html(Nights + " x " + Price + " = " + RoomPrice);
   $("#addedValuePrice").html(RoomPrice + " x " + 0.14 + " = " + AddedValueTax);
   $("#totalDue").html(TotalPrice);
 
 }
+
+
+nights = $("#nights").val();
+if (new Date($("#checkin").val()) < new Date()) {
+  checkin = false;
+  $("#checkin").addClass("RedBorder");
+  $("#Error").html("Check in date must be greater that current date");
+  $("#Error").fadeIn();
+  $("#Success").fadeOut();
+} else {
+  checkin = $("#checkin").val();
+  $("#checkin").removeClass("RedBorder");
+  $("#Error").fadeOut();
+}
+
+if (Ready()) {
+  UpdateCart(roomtype , nights);
+  $("#Success").fadeIn();
+}
+
 
 $("#checkin").change(function() {
   if (new Date($(this).val()) < new Date()) {
@@ -483,6 +507,7 @@ $("#nights").change(function() {
   }
 });
 
+
 $(".RoomType").click(function(){
   $(".RoomType").removeClass("Selected");
   $(this).addClass("Selected");
@@ -507,7 +532,6 @@ $('.question').on("click", function(){
 });
 
 $("#search-btn").bind("click", SearchValiation);
-$("#subscribe-btn").bind("click", SubscriptionValidation);
 $("#payment-btn").bind("click", VisaValidation);
 $("#register-btn").bind("click", RegisterValidation);
 $("#login-btn").bind("click", LoginValidation);
